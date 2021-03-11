@@ -61,48 +61,46 @@
         });
      });
 </script>
+<%--<script>--%>
+<%--    $(document).ready(function(){--%>
+<%--        $("#button").click(function(){--%>
+<%--                var selected = [];--%>
+<%--                $.each($("input[name='place']:checked"), function(){--%>
+<%--                    selected.push($(this).val());--%>
+<%--                });--%>
+<%--                selected = JSON.stringify(selected);--%>
+<%--                console.log(selected);--%>
+<%--                if (selected.length !== 0 ) {--%>
+<%--                    $.ajax({--%>
+<%--                        type: 'POST',--%>
+<%--                        url: 'http://localhost:8080/cinema/index',--%>
+<%--                        data: selected,--%>
+<%--                        contentType: 'application/json; charset=utf-8',--%>
+<%--                        dataType: 'json',--%>
+<%--                        // success: function() {--%>
+<%--                        //     window.location.href = '/cinema' + "/payment.jsp";--%>
+<%--                        // }--%>
+<%--                    });--%>
+<%--                } else {--%>
+<%--                    alert('выберите места')--%>
+<%--                }--%>
+
+<%--         });--%>
+<%--    });--%>
+<%--</script>--%>
 <script>
-    $(document).ready(function(){
-        $("#button").click(function(){
-                var selected = [];
-                $.each($("input[name='place']:checked"), function(){
-                    selected.push($(this).val());
-                });
-                selected = JSON.stringify(selected);
-                console.log(selected);
-                if (selected.length !== 0 ) {
-                    $.ajax({
-                        type: 'POST',
-                        url: 'http://localhost:8080/cinema/index',
-                        data: selected,
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                        success: function(msg) {
-                           alert('успех');
-                        }
-                    });
-                } else {
-                    alert('выберите места')
-                }
-
-         });
-    });
-
-    // $(document).ready(function(){
-    //     $("#button").click(function(){
-    //         var selected = [];
-    //         $.each($("input[name='place']:checked"), function(){
-    //             selected.push($(this).val());
-    //         });
-    //         if (selected.length !== 0 ) {
-    //             selected = JSON.stringify(selected);
-    //             console.log(selected);
-    //             window.location.href = '/cinema' + "/payment.jsp?arr=" + selected;
-    //         } else {
-    //             alert('выберите места')
-    //         }
-    //     });
-    // });
+    function validate() {
+        let result = true;
+        let selected = [];
+        $.each($("input[name='place']:checked"), function(){
+            selected.push($(this).val());
+        });
+        if (selected.length === 0 ) {
+            alert("не выбраны места");
+            result = false;
+        }
+        return result;
+    }
 </script>
 <script>
     $(document).ready(function () {
@@ -113,7 +111,7 @@
 </script>
 </head>
 <body>
-<%--    <form action="<c:url value='/index'/>" method="post" >--%>
+    <form action="<%=request.getContextPath()%>/payment" method="get" >
         <div class="container">
             <div class="row pt-3">
                     <h4>
@@ -132,11 +130,10 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="row float-right">
-                <button id="button" type="button" class="btn btn-primary">Оплатить</button>
+                <button type="submit" class="btn btn-primary" onclick="return validate()">отправить</button>
             </div>
         </div>
-<%--    </form>--%>
+    </form>
 </body>
 </html>

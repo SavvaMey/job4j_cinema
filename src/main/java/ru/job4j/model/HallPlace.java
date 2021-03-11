@@ -2,7 +2,7 @@ package ru.job4j.model;
 
 import java.util.Objects;
 
-public class HallPlace {
+public class HallPlace implements Comparable<HallPlace> {
     private int id;
     private int row;
     private int col;
@@ -85,5 +85,10 @@ public class HallPlace {
                 + ", status=" + status
                 + ", accountId=" + accountId
                 + '}';
+    }
+
+    @Override
+    public int compareTo(HallPlace o) {
+        return Integer.compare(id, o.id);
     }
 }

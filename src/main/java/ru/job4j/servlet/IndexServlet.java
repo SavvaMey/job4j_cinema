@@ -39,19 +39,4 @@ public class IndexServlet extends HttpServlet {
         writer.println(ar);
         writer.flush();
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        StringBuilder buffer = new StringBuilder();
-        BufferedReader reader = req.getReader();
-        String line;
-       if ((line = reader.readLine()) != null) {
-            buffer.append(line);
-        }
-        String data = buffer.toString();
-        System.out.println(data);
-        req.setAttribute("reserved", data);
-        resp.sendRedirect(req.getContextPath() + "/payment"); // - не работает переходит в сервлет и страницу не обновляет
-        req.getRequestDispatcher("/payment.jsp").forward(req, resp); // - не работает
-    }
 }

@@ -1,5 +1,6 @@
 package ru.job4j.store;
 
+import ru.job4j.model.Account;
 import ru.job4j.model.HallPlace;
 
 import java.util.Collection;
@@ -7,10 +8,11 @@ import java.util.Collection;
 public interface Store {
     Collection<HallPlace> getAllPlaces();
 
-    void saveSelectedPlaces(HallPlace place);
+    Collection<HallPlace> getReservedPlaces(String[] id);
 
-    void updatePlacesStore(Collection<HallPlace> places);
+    Account saveUser(Account account);
 
-    HallPlace findHallPlaceById (int id);
+    Account findAccount(String phone);
 
+    void updatePlacesStore(Account account, String[] idS);
 }
